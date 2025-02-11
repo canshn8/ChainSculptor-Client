@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Card from '../components/Card';
 import CardDetails from './CardDetails';
+import axios from "axios";
 
 const JobList = () => {
   const [selectedJob, setSelectedJob] = useState(null);
@@ -14,20 +15,28 @@ const JobList = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch('/jobs.json');
-        if (!response.ok) {
-          throw new Error('Veriler alınırken hata oluştu');
+        const response = await axios.get('http://localhost:8000/api/job/getJobs');
+        const data = response.data.data;  // data anahtarına ulaşmak gerekiyor
+  
+        // Veriyi konsola yazdırarak türünü kontrol et
+        console.log('Veri:', data);
+        console.log('Veri Türü:', Array.isArray(data));
+  
+        if (Array.isArray(data)) {
+          setAllJobs(data); 
+          setJobs(data.slice(0, 6)); // Sayfada ilk 6 öğeyi gösterebiliriz
+        } else {
+          throw new Error('API yanıtı geçerli bir dizi değil');
         }
-        const data = await response.json();
-        setAllJobs(data); // Bellekte tut
-        setJobs(data.slice(0, 6)); // Sayfa açıldığında ekranı dolduracak kadar ilan koy
       } catch (err) {
-        console.error(err);
+        console.error('API isteği sırasında hata oluştu:', err);
       }
     };
-
+  
     fetchJobs();
   }, []);
+  
+  
 
   // Scroll ile yeni ilanları yükleme
   const loadMoreJobs = () => {
@@ -69,7 +78,7 @@ const JobList = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+    <div className="max-w-7xl mx-auto p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-20">
       {jobs.map((job, index) => (
         <Card key={index} job={job} onCardClick={handleCardClick} />
       ))}
