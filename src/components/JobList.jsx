@@ -1,60 +1,34 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchJobs, setJobs, setLoading, setPage } from '../redux/jobSlice';  
 import Card from '../components/Card';
 import CardDetails from './CardDetails';
-import axios from "axios";
 
 const JobList = () => {
+  const dispatch = useDispatch();
+  const { jobs, allJobs, page, loading } = useSelector((state) => state.job);
   const [selectedJob, setSelectedJob] = useState(null);
-  const [jobs, setJobs] = useState([]); // Ekranda görünen ilanlar
-  const [allJobs, setAllJobs] = useState([]); // JSON'dan çekilen tüm ilanlar
-  const [page, setPage] = useState(1); // Kaçıncı sayfadayız
-  const [loading, setLoading] = useState(false); // Yükleniyor mu?
-  const loader = useRef(null); // Scroll takip için ref
+  const loader = useRef(null);
 
-  // Sayfa açıldığında tüm ilanları çek
   useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/api/job/getJobs');
-        const data = response.data.data;  // data anahtarına ulaşmak gerekiyor
-  
-        // Veriyi konsola yazdırarak türünü kontrol et
-        console.log('Veri:', data);
-        console.log('Veri Türü:', Array.isArray(data));
-  
-        if (Array.isArray(data)) {
-          setAllJobs(data); 
-          setJobs(data.slice(0, 6)); // Sayfada ilk 6 öğeyi gösterebiliriz
-        } else {
-          throw new Error('API yanıtı geçerli bir dizi değil');
-        }
-      } catch (err) {
-        console.error('API isteği sırasında hata oluştu:', err);
-      }
-    };
-  
-    fetchJobs();
-  }, []);
-  
-  
+    dispatch(fetchJobs());  
+  }, [dispatch]);
 
-  // Scroll ile yeni ilanları yükleme
   const loadMoreJobs = () => {
-    if (loading) return; // Zaten yükleniyorsa tekrar yükleme
+    if (loading) return;
 
-    setLoading(true);
+    dispatch(setLoading(true)); 
 
     setTimeout(() => {
-      const newJobs = allJobs.slice(page * 6, (page + 1) * 6); // Yeni 6 ilan al
+      const newJobs = allJobs.slice(page * 6, (page + 1) * 6);
       if (newJobs.length > 0) {
-        setJobs((prevJobs) => [...prevJobs, ...newJobs]); // Öncekilerin üstüne ekle
-        setPage((prevPage) => prevPage + 1); // Sayfa numarasını artır
+        dispatch(setJobs({ jobs: [...jobs, ...newJobs], allJobs }));
+        dispatch(setPage(page + 1));
       }
-      setLoading(false);
-    }, 600); // 1 saniye gecikme (gerçekçi bir efekt için)
+      dispatch(setLoading(false));
+    }, 600);
   };
 
-  // Scroll takip etme
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -83,13 +57,12 @@ const JobList = () => {
         <Card key={index} job={job} onCardClick={handleCardClick} />
       ))}
 
-      {/* Scroll tetikleme alanı */}
       <div ref={loader} className="h-10 bg-transparent"></div>
 
-      {/* Yükleniyor animasyonu */}
-      {/* {loading && <p className="text-center text-gray-500">Yükleniyor...</p>} */}
+      {loading && jobs.length < allJobs.length && (
+        <p className="text-center text-gray-500">Yükleniyor...</p>
+      )}
 
-      {/* Kart Detayı */}
       {selectedJob && <CardDetails job={selectedJob} onClose={handleClose} />}
     </div>
   );

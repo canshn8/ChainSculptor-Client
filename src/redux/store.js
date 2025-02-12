@@ -1,16 +1,10 @@
-// app/store.js
-import { configureStore } from "@reduxjs/toolkit";
-import { thunk } from 'redux-thunk';
-// import projectReducer from "./projectSlice";
-// import userReducer  from "./userSlice";
-
+import { configureStore } from '@reduxjs/toolkit';
+import jobReducer from './jobSlice'; 
 
 const store = configureStore({
   reducer: {
-    
+    job: jobReducer, 
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(thunk),
 });
 
 export default store;

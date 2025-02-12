@@ -75,6 +75,14 @@ export default function NavBar() {
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/account"
+                  className="block py-2 px-3 text-navLink rounded hover:text-cardBtnNtr hover:border-b-2 hover:border-cardBtnNtr transition-all"
+                >
+                  Account
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
