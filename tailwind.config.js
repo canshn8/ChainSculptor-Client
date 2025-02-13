@@ -7,11 +7,32 @@ module.exports = {
       extend: {
         animation: {
           'slide-in': 'slideIn 1s ease-out',
+          fadeIn: 'fadeIn 1.5s ease-out',
+          fadeUp: 'fadeUp 1.5s ease-out',
+          titleUp: 'titleUp 2s ease-out',
+          particleAnimation: 'particleAnimation 4s linear infinite',
         },
         keyframes: {
           slideIn: {
             '0%': { opacity: 0, transform: 'translateY(-900px)' },
             '100%': { opacity: 1, transform: 'translateY(0)' },
+          },
+          fadeIn: {
+            '0%': { opacity: 0 },
+            '100%': { opacity: 1 },
+          },
+          fadeUp: {
+            '0%': { transform: 'translateY(30px)', opacity: 0 },
+            '100%': { transform: 'translateY(0)', opacity: 1 },
+          },
+          titleUp: {
+            '0%': { transform: 'translateY(100px)', opacity: 0 },
+            '50%': { transform: 'translateY(30px)', opacity: 0.6 },
+            '100%': { transform: 'translateY(0)', opacity: 1 },
+          },
+          particleAnimation: {
+            '0%': { transform: 'translateY(0) scale(0.5)', opacity: 1 },
+            '100%': { transform: 'translateY(-100vh) scale(1)', opacity: 0 },
           },
         },
         colors: {

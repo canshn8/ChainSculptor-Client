@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
+import { register, login } from "../redux/userSlice";
 
 const Account = () => {
+  const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState({
-    emailOrUsername: "",
     email: "",
-    username: "",
+    name: "",
     password: "",
     confirmPassword: "",
+    role:"Freelancer"
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -34,7 +37,12 @@ const Account = () => {
     }
 
     try {
-      console.log(isLogin ? "Logging in with:" : "Registering with:", formData);
+      // İlgili işlemi tetikle
+      if (isLogin) {
+        dispatch(login({ email: formData.email, password: formData.password }));
+      } else {
+        dispatch(register({ email: formData.email, name: formData.name, role:formData.role, password: formData.password }));
+      }
     } catch (err) {
       console.error("Request failed:", err);
     }
@@ -66,13 +74,13 @@ const Account = () => {
             >
               {isLogin ? (
                 <div className="mb-4">
-                  <label className="block text-darkBrown mb-2">Email or Username</label>
+                  <label className="block text-darkBrown mb-2">Email </label>
                   <input
                     type="text"
-                    name="emailOrUsername"
+                    name="email"
                     className="w-full px-4 py-2 rounded-lg bg-input text-darkBrown focus:outline-none"
-                    placeholder="Enter your email or username"
-                    value={formData.emailOrUsername}
+                    placeholder="Enter your email "
+                    value={formData.email}
                     onChange={handleChange}
                     autoComplete="off"
                     required
@@ -94,13 +102,13 @@ const Account = () => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label className="block text-darkBrown mb-2">Username</label>
+                    <label className="block text-darkBrown mb-2">Name</label>
                     <input
                       type="text"
-                      name="username"
+                      name="name"
                       className="w-full px-4 py-2 rounded-lg bg-input text-darkBrown focus:outline-none"
-                      placeholder="Enter your username"
-                      value={formData.username}
+                      placeholder="Enter your name"
+                      value={formData.name}
                       onChange={handleChange}
                       autoComplete="off"
                       required

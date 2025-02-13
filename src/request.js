@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const reqUrl = "http://localhost:8000/api"; 
 
+
 const request = async (method, url, data) => {
   const storedUser = localStorage.getItem("persist:root");
   let TOKEN = null;

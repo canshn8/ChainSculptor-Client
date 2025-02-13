@@ -5,13 +5,15 @@ import Card from "../components/Card";
 import JobList from "../components/JobList";
 import Search from "../components/SearchFilter";
 import { Helmet } from 'react-helmet';
+import ChainSculptor from '../components/Back';
 
 const Home = () => {
 
 
   return (
     <div>
-      <Helmet>
+            <ChainSculptor />
+      {/* <Helmet>
         <title>Ana Sayfa | Freelance Platform</title>
         <meta name="description" content="Freelance platformumuz, doğru yetenekleri bulmanızı ve projelerinizi zamanında tamamlamanızı sağlar." />
         <meta name="keywords" content="freelance, yazılım, tasarım, dijital pazarlama, iş bulma, proje yönetimi" />
@@ -24,7 +26,7 @@ const Home = () => {
             <JobList />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
 
   );
