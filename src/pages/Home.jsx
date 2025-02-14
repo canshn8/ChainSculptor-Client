@@ -1,34 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
-import Card from "../components/Card";
-import JobList from "../components/JobList";
-import Search from "../components/SearchFilter";
 import { Helmet } from 'react-helmet';
-import ChainSculptor from '../components/Back';
+import { useNavigate } from 'react-router-dom';
+import ChainSculptor from '../components/Back'; 
 
 const Home = () => {
+  const [scrolled, setScrolled] = useState(false); 
+  const [transitioning, setTransitioning] = useState(false); 
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setScrolled(true);
+        goToJobs()
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const goToJobs = () => {
+    setTransitioning(true); 
+    setTimeout(() => {
+      navigate('/jobs'); 
+    }, 1000); 
+  };
 
   return (
     <div>
-            <ChainSculptor />
-      {/* <Helmet>
-        <title>Ana Sayfa | Freelance Platform</title>
-        <meta name="description" content="Freelance platformumuz, doğru yetenekleri bulmanızı ve projelerinizi zamanında tamamlamanızı sağlar." />
-        <meta name="keywords" content="freelance, yazılım, tasarım, dijital pazarlama, iş bulma, proje yönetimi" />
-      </Helmet>
-      
-      <div className="relative">
-        <div className="flex flex-col items-center justify-center mt-12">
-          <div className="p-4 text-white">
-            <Search />
-            <JobList />
-          </div>
-        </div>
-      </div> */}
-    </div>
+      <div 
+        className={`absolute top-0 left-0 w-full h-screen transition-opacity duration-1000 ${scrolled || transitioning ? 'opacity-0' : 'opacity-100'}`}
+      >
+        <ChainSculptor />
+      </div>
 
+      <div 
+        className={`relative z-10 min-h-screen text-black transition-opacity duration-1000 ${scrolled || transitioning ? 'opacity-100' : 'opacity-0'}`}
+      >
+      </div>
+    </div>
   );
 };
 

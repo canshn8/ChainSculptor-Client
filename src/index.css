@@ -2,7 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Partiküller için animasyon */
+
+@keyframes bounceUp {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); 
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-bounceUp {
+  animation: bounceUp 1s ease-in-out infinite;
+}
+
 @keyframes particleAnimation {
     0% {
       transform: translateY(0) scale(0.5);
