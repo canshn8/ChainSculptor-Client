@@ -9,9 +9,6 @@ export default function Footer() {
             href=""
             className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
           >
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              {/* Buraya logoyu veya ismi ekleyebilirsin */}
-            </span>
           </a>
           <ul className="flex flex-wrap items-center justify-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>

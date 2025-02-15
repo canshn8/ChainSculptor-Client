@@ -21,15 +21,15 @@ const ChainSculptor = () => {
 
   useEffect(() => {
     const createParticle = () => {
-      if (scrolled) return; 
+      if (scrolled) return;
       const particle = document.createElement("div");
       particle.classList.add("particle");
       document.body.appendChild(particle);
 
-      const size = Math.random() * 10 + 5; 
+      const size = Math.random() * 10 + 5;
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
-      particle.style.backgroundColor = "rgba(255, 255, 255, 0.8)"; 
+      particle.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
 
       particle.style.left = `${Math.random() * 100}vw`;
       particle.style.animation = `particleAnimation ${
@@ -64,15 +64,15 @@ const ChainSculptor = () => {
           Chain Sculptor
         </h1>
         <p className="text-3xl mb-4 cursor-pointer">
-  <span className="inline-block">
-    <i className="fas fa-mouse-pointer"></i> 
-  </span>
-</p>
-<p className="text-3xl mb-4 cursor-pointer">
-  <span className="inline-block">Kaydırmak İçin Mouse Tekerleğini Kullanın</span>
-</p>
-
-
+          <span className="inline-block">
+            <i className="fas fa-mouse-pointer"></i>
+          </span>
+        </p>
+        <p className="text-3xl mb-4 cursor-pointer">
+          <span className="inline-block">
+            Kaydırmak İçin Mouse Tekerleğini Kullanın
+          </span>
+        </p>
       </div>
     </div>
   );

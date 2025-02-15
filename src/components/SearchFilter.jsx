@@ -47,7 +47,7 @@ const SearchFilter = ({ onSearch }) => {
   return (
     <div className="flex">
       {/* Sol tarafta sabit filtreler */}
-      <div className="w-80 p-6 bg-beige dark:bg-deep-mocha rounded-md shadow-lg fixed top-52 left-4">
+      <div className="w-80 p-6 bg-beige rounded-md shadow-lg fixed top-52 left-4">
         <form onSubmit={handleSearchSubmit} className="flex flex-col space-y-4">
           <input
             type="text"
