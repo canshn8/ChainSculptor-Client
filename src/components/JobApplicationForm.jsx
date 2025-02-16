@@ -1,24 +1,49 @@
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { addJob } from "../redux/jobSlice";
 
-const JobPostingModal = () => {
+const JobApplicationForm = () => {
+  const dispatch = useDispatch();
   const [job, setJob] = useState({
     title: "",
     description: "",
-    category: "",
-    budget: "",
-    deadline: "",
+    categories: [],
+    budget: {
+      min: "",
+      max: "",
+    },
+    deliveryTime: "",
+    employer: "", 
     jobType: "",
-    tags: [],
+    status: "Open",
+    portfolio: "",
+    evaluation: "",
+    escrowStatus: "Pending",
+    paymentStatus: "Pending",
+    freelancerApplications: [],
     details: [],
+    tags: [], 
   });
+
   const [tagInput, setTagInput] = useState("");
 
   const handleChange = (e) => {
-    setJob({ ...job, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === "budget.min" || name === "budget.max") {
+      setJob({
+        ...job,
+        budget: {
+          ...job.budget,
+          [name.split(".")[1]]: value ? parseFloat(value) : "", 
+        },
+      });
+    } else {
+      setJob({ ...job, [name]: value });
+    }
   };
 
   const handleTagChange = (e) => {
@@ -31,17 +56,81 @@ const JobPostingModal = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addJob(job));
+    console.log(job); 
+  };
+
   return (
     <div className="p-6 bg-white rounded-xl shadow-md w-full max-w-lg">
       <h2 className="text-xl font-semibold mb-4">İş İlanı Oluştur</h2>
-      <div className="space-y-4">
-        <Input name="title" placeholder="İş Başlığı" value={job.title} onChange={handleChange} />
-        <Textarea name="description" placeholder="Açıklama" value={job.description} onChange={handleChange} />
-        <Input name="category" placeholder="Kategori" value={job.category} onChange={handleChange} />
-        <Input name="budget" placeholder="Bütçe" value={job.budget} onChange={handleChange} />
-        <Input name="deadline" placeholder="Teslim Süresi" type="date" value={job.deadline} onChange={handleChange} />
-        <Input name="jobType" placeholder="İş Türü" value={job.jobType} onChange={handleChange} />
-
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          name="title"
+          placeholder="İş Başlığı"
+          value={job.title}
+          onChange={handleChange}
+        />
+        <Textarea
+          name="description"
+          placeholder="Açıklama"
+          value={job.description}
+          onChange={handleChange}
+        />
+        <Input
+          name="categories"
+          placeholder="Kategori"
+          value={job.categories.join(", ")}
+          onChange={(e) =>
+            setJob({
+              ...job,
+              categories: e.target.value.split(",").map((cat) => cat.trim()),
+            })
+          }
+        />
+        <div className="flex space-x-2">
+          <Input
+            name="budget.min"
+            placeholder="Bütçe Min"
+            type="number"
+            value={job.budget.min || ""}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            name="budget.max"
+            placeholder="Bütçe Max"
+            type="number"
+            value={job.budget.max || ""}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <Input
+          name="deliveryTime"
+          placeholder="Teslim Süresi"
+          value={job.deliveryTime}
+          onChange={handleChange}
+        />
+        <Input
+          name="jobType"
+          placeholder="İş Türü"
+          value={job.jobType}
+          onChange={handleChange}
+        />
+        <Input
+          name="portfolio"
+          placeholder="Portföy Linki"
+          value={job.portfolio}
+          onChange={handleChange}
+        />
+        <Input
+          name="evaluation"
+          placeholder="Değerlendirme"
+          value={job.evaluation}
+          onChange={handleChange}
+        />
         <div>
           <Input
             type="text"
@@ -51,27 +140,34 @@ const JobPostingModal = () => {
             onKeyDown={handleTagChange}
             disabled={job.tags.length >= 5}
           />
-          <div className="flex flex-wrap mt-2">
-            {job.tags.map((tag, index) => (
-              <span key={index} className="mr-2 mb-2 text-xs bg-gray-200 px-3 py-1 rounded-full">
-                #{tag}
-              </span>
-            ))}
+          <div>
+            {job.tags && job.tags.length > 0 ? (
+              job.tags.map((tag, index) => (
+                <span key={index} className="mr-2 mb-2 text-xs bg-gray-200 px-3 py-1 rounded-full">
+                  #{tag}
+                </span>
+              ))
+            ) : (
+              <span></span>
+            )}
           </div>
-        </div>
 
+        </div>
         <Textarea
           name="details"
           placeholder="İş Detayları (Her satır yeni bir madde)"
           value={job.details.join("\n")}
-          onChange={(e) => setJob({ ...job, details: e.target.value.split("\n") })}
+          onChange={(e) =>
+            setJob({ ...job, details: e.target.value.split("\n") })
+          }
           rows={4}
         />
-
-        <Button className="w-full bg-blue-500 text-white">İlanı Yayınla</Button>
-      </div>
+        <Button type="submit" className="w-full bg-blue-500 text-white">
+          İlanı Yayınla
+        </Button>
+      </form>
     </div>
   );
 };
 
-export default JobPostingModal;
+export default JobApplicationForm;

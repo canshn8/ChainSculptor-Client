@@ -11,10 +11,8 @@ export default function About() {
         </Helmet>
     
     <div className="max-w-screen-xl mx-auto px-6 py-12">
-      {/* Başlık */}
       <h1 className="text-4xl font-bold text-center text-darkBrown mb-10">Hakkımızda</h1>
 
-      {/* Hakkımızda metni */}
       <div className="text-center mb-12">
         <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
           Freelance platformumuz, işinizi büyütmek için doğru yetenekleri bulmanızı sağlar. 
@@ -23,7 +21,6 @@ export default function About() {
         </p>
       </div>
 
-      {/* Neden Biz? */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
         <div className="bg-white dark:bg-bej p-8 rounded-xl shadow-xl transition transform hover:scale-105 hover:shadow-2xl">
           <h2 className="text-2xl font-semibold text-darkBrown mb-6">Neden Biz?</h2>
@@ -36,7 +33,6 @@ export default function About() {
           </ul>
         </div>
 
-        {/* Hizmetlerimiz */}
         <div className="bg-white dark:bg-bej p-8 rounded-xl shadow-xl transition transform hover:scale-105 hover:shadow-2xl">
           <h2 className="text-2xl font-semibold text-darkBrown mb-6">Hizmetlerimiz</h2>
           <ul className="space-y-4 text-lg text-gray-600 dark:text-gray-400">
@@ -49,7 +45,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* Başarı Hikayelerimiz */}
       <div className="mb-16">
         <h2 className="text-3xl font-semibold text-darkBrown text-center mb-8">Başarı Hikayelerimiz</h2>
         <div className="flex flex-wrap justify-center gap-8">
@@ -94,7 +89,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* İletişim ve Call-to-Action */}
       <div className="text-center">
         <h3 className="text-2xl font-semibold text-darkBrown mb-6">Projeleriniz İçin Bizimle Çalışın!</h3>
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">

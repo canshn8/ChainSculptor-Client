@@ -26,6 +26,7 @@ const Home = () => {
     setTransitioning(true); 
     setTimeout(() => {
       navigate('/jobs'); 
+      window.scrollTo(0, 0);
     }, 1000); 
   };
 

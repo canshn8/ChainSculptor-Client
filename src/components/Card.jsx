@@ -12,7 +12,7 @@ const Card = ({ job, onCardClick }) => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.5 } // %50'si görünür olduğunda
+      { threshold: 0.5 } 
     );
 
     const element = document.querySelector(`#card-${job?.id}`);

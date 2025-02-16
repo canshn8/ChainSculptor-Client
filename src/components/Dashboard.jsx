@@ -16,7 +16,7 @@ const Dashboard = () => {
   });
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedJobType, setSelectedJobType] = useState(null); // To track which modal is open
+  const [selectedJobType, setSelectedJobType] = useState(null); 
 
   const completedJobsDetails = [
     { id: 1, job: "Web Development Project" },
@@ -71,7 +71,6 @@ const Dashboard = () => {
     ],
   };
 
-  // Güncellenmiş içerikler
   const activeClientsDetails = [
     { id: 1, client: "ABC Corp", lastActivity: "2025-01-30" },
     { id: 2, client: "XYZ Ltd", lastActivity: "2025-02-05" },
@@ -83,7 +82,6 @@ const Dashboard = () => {
     { id: 3, client: "DEF Industries", jobs: ["SEO Optimization", "Digital Marketing"] },
     { id: 4, client: "GHI Solutions", jobs: ["Web Development", "SEO Optimization"] },
     { id: 5, client: "JKL Enterprises", jobs: ["Mobile App Design", "E-commerce Site Setup"] },
-    // Diğer müşteriler ve yaptıkları işler...
   ];
 
   useEffect(() => {
@@ -155,7 +153,6 @@ const Dashboard = () => {
 
       <h2 className="text-3xl font-bold  text-darkBrown">Dashboard</h2>
 
-      {/* Dashboard Header */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div
           className="bg-white dark:bg-bej p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer"
@@ -197,13 +194,11 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Kazanç Grafiği */}
       <div className="bg-white dark:bg-bej p-6 rounded-xl shadow-md hover:shadow-lg transition mb-8">
         <h3 className="text-2xl font-semibold text-darkBrown mb-4">Son 6 Aylık Kazançlar</h3>
         <Line data={chartData} options={{ responsive: true, plugins: { legend: { position: "top" }, title: { display: true, text: "Kazançlar" } } }} />
       </div>
 
-      {/* Müşteri İstatistikleri */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div
           className="bg-white dark:bg-bej p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer"

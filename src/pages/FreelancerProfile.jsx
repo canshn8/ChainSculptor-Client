@@ -26,13 +26,11 @@ const FreelancerProfile = () => {
         <meta name="description" content="Freelancer olarak profilinizi oluşturun ve projelerde yer almak için iş teklifleri alın." />
         <meta name="keywords" content="freelancer, profil, iş, proje, iş bulma" />
 
-        {/* Open Graph Tags */}
         <meta property="og:title" content="Freelancer Profili | Freelance Platform" />
         <meta property="og:description" content="Freelancer olarak iş fırsatları ve projelerde yer almak için profil oluşturun." />
         <meta property="og:image" content="https://yourwebsite.com/path-to-image.jpg" />
         <meta property="og:url" content="https://yourwebsite.com/freelancer" />
 
-        {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Freelancer Profili | Freelance Platform" />
         <meta name="twitter:description" content="Freelancer olarak iş fırsatları ve projelerde yer almak için profil oluşturun." />

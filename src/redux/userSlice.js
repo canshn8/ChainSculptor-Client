@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import request from '../request';
 
 const storedUser = localStorage.getItem("user");
 
@@ -60,7 +61,7 @@ const userSlice = createSlice({
 export const login = (userData) => async (dispatch) => {
   dispatch(loginStart());
   try {
-    const res = await axios.post("http://localhost:8000/api/auth/signin", userData);
+    const res = await request.request('POST', '/auth/signin', userData);
     console.log(userData);
     
     console.log("Response from API : ",res);
@@ -75,7 +76,7 @@ export const login = (userData) => async (dispatch) => {
 export const register = (user) => async (dispatch) => {
     dispatch(loginStart());
     try {
-      const res = await axios.post("http://localhost:8000/api/auth/signup", user);  
+      const res = await request.request('POST', '/auth/signup', user);  
       dispatch(registerSuccess(res.data));
       console.log(res+" : "+res.data);
        

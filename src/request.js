@@ -1,20 +1,27 @@
 import axios from "axios";
 
-export const reqUrl = "http://localhost:8000/api"; 
-
+export const reqUrl = "http://localhost:8000/api";
 
 const request = async (method, url, data) => {
-  const storedUser = localStorage.getItem("persist:root");
+  const storedUser = localStorage.getItem("user");
+  console.log(storedUser);
+
   let TOKEN = null;
 
   if (storedUser) {
-    const user = JSON.parse(JSON.parse(storedUser).user);
-    if (user && user.currentUser) {
-      TOKEN = user.currentUser.accessToken;
+    try {
+      const user = JSON.parse(storedUser); 
+      console.log(user);  
+      if (user.data && user.data.token) {
+        TOKEN = user.data.token;  
+        console.log(TOKEN); 
+      }
+    } catch (err) {
+      console.error("JSON parse error:", err); 
     }
   }
 
-  const headers = TOKEN ? { token: `Bearer ${TOKEN}` } : {};
+  const headers = TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {};
 
   try {
     const res = await axios({

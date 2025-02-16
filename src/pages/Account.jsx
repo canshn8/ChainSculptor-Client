@@ -37,7 +37,6 @@ const Account = () => {
     }
 
     try {
-      // İlgili işlemi tetikle
       if (isLogin) {
         dispatch(login({ email: formData.email, password: formData.password }));
       } else {

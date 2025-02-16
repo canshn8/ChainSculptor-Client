@@ -83,7 +83,6 @@
     animation: titleUp 2s ease-out;
   }
   
-  /* Başlık ve metin stilini sade ve zarif tutalım */
   h1 {
     font-family: 'Helvetica Neue', sans-serif;
     color: #f5f5f5;
@@ -94,18 +93,15 @@
     color: #d6d6d6;
   }
   
-  /* Arka plan resmini cover yapmak ve geçiş efekti */
   .bg-cover {
     background-size: cover;
     background-position: center center;
   }
   
-  /* Arka plan için opaklık ve renk */
   .bg-black {
     background-color: rgba(0, 0, 0, 0.5);
   }
   
-  /* Arka plan için yumuşak opaklık */
   .relative {
     position: relative;
   }
@@ -118,7 +114,6 @@
     z-index: 10;
   }
   
-  /* Sade animasyon ve efekt */
   .text-center {
     text-align: center;
   }

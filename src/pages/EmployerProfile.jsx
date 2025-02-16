@@ -26,13 +26,11 @@ const EmployerProfile = () => {
         <meta name="description" content="İşveren olarak platformda profilinizi oluşturun ve en iyi freelance uzmanlarla çalışmaya başlayın." />
         <meta name="keywords" content="işveren, profil, freelance, uzman, proje" />
 
-        {/* Open Graph Tags */}
         <meta property="og:title" content="İşveren Profili | Freelance Platform" />
         <meta property="og:description" content="Freelance uzmanlarla çalışmaya başlamak için işveren profilinizi oluşturun." />
         <meta property="og:image" content="https://yourwebsite.com/path-to-image.jpg" />
         <meta property="og:url" content="https://yourwebsite.com/employer" />
 
-        {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="İşveren Profili | Freelance Platform" />
         <meta name="twitter:description" content="Freelance uzmanlarla çalışmaya başlamak için işveren profilinizi oluşturun." />

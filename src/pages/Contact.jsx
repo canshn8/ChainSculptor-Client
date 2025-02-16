@@ -19,7 +19,6 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Mesaj gönderildi!");
-    // Buraya formu göndermek için API isteği ekleyebilirsiniz.
   };
 
   return (
@@ -29,13 +28,11 @@ export default function Contact() {
         <meta name="description" content="Bizimle iletişime geçin ve projeleriniz için destek alın." />
         <meta name="keywords" content="iletişim, destek, müşteri hizmetleri, freelance, iş görüşmesi" />
 
-        {/* Open Graph Tags */}
         <meta property="og:title" content="İletişim | Freelance Platform" />
         <meta property="og:description" content="Projeleriniz ve destek talepleriniz için bizimle iletişime geçebilirsiniz." />
         <meta property="og:image" content="https://yourwebsite.com/path-to-image.jpg" />
         <meta property="og:url" content="https://yourwebsite.com/contact" />
 
-        {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="İletişim | Freelance Platform" />
         <meta name="twitter:description" content="Projeleriniz ve destek talepleriniz için bizimle iletişime geçebilirsiniz." />
@@ -47,7 +44,6 @@ export default function Contact() {
       <h1 className="text-4xl font-bold text-center text-darkBrown mb-10">İletişim</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Sol Kısım - İletişim Detayları */}
         <div className="flex flex-col justify-center">
           <h2 className="text-2xl font-semibold text-darkBrown mb-4">Bize Ulaşın</h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
@@ -64,7 +60,6 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Sağ Kısım - Form */}
         <div className="bg-white dark:bg-bej p-8 rounded-xl shadow-xl transition transform hover:scale-105 hover:shadow-2xl">
           <form onSubmit={handleSubmit}>
             <div className="mb-6">

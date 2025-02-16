@@ -33,7 +33,7 @@ const CardDetails = ({ job, onClose }) => {
     <AnimatePresence>
       {job && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md z-50"
+          className="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-blur-md z-50"
           onClick={handleClickOutside}
         >
           <motion.div

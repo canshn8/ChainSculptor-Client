@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Menüyü açıp kapatmak için state
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -12,16 +12,14 @@ export default function NavBar() {
       <nav className="bg-white dark:bg-bej rounded-lg shadow-lg m-4">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8 md:mt-5 flex justify-between font-semibold items-center relative">
           <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            {/* Logo */}
             <span className="self-center text-2xl font-semibold whitespace-nowrap text-navLink">
               ChainSculptor
             </span>
           </a>
 
-          {/* Burger menüsünü tetiklemek için buton */}
           <button
             onClick={toggleMenu}
-            className={`md:hidden text-navLink transition-all duration-300 absolute right-4 top-4`} // Sağ üstte sabit
+            className={`md:hidden text-navLink transition-all duration-300 absolute right-4 top-4`} 
             aria-label="Toggle menu"
           >
             <svg
@@ -31,7 +29,6 @@ export default function NavBar() {
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              {/* Burger ikonu */}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -39,7 +36,6 @@ export default function NavBar() {
                 d="M4 6h16M4 12h16M4 18h16"
                 className={`${isMenuOpen ? "hidden" : ""}`}
               />
-              {/* Çarpı ikonu */}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -50,15 +46,13 @@ export default function NavBar() {
             </svg>
           </button>
 
-          {/* Menüyü açıp kapatmayı kontrol eden div */}
           <div
             className={`${
               isMenuOpen ? "block" : "hidden"
-            } transition-all ease-in-out duration-300 w-full md:flex md:w-auto md:order-1 bg-transparent`} // Arka plan rengi sayfa arka planına uyacak
+            } transition-all ease-in-out duration-300 w-full md:flex md:w-auto md:order-1 bg-transparent`} 
             id="navbar-user"
           >
             <ul className="flex flex-col md:flex-row font-medium p-4 md:p-0 mt-4 border-0 rounded-lg md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-transparent items-end text-right">
-              {/* Menü öğeleri */}
               <li>
                 <Link
                   to="/about"
