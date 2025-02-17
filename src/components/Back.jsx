@@ -68,11 +68,6 @@ const ChainSculptor = () => {
             <i className="fas fa-mouse-pointer"></i>
           </span>
         </p>
-        <p className="text-3xl mb-4 cursor-pointer">
-          <span className="inline-block">
-            Kaydırmak İçin Mouse Tekerleğini Kullanın
-          </span>
-        </p>
       </div>
     </div>
   );

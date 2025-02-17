@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaUpload } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -63,24 +62,26 @@ const JobApplicationForm = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow-md w-full max-w-lg">
-      <h2 className="text-xl font-semibold mb-4">İş İlanı Oluştur</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="p-8 bg-cardBg rounded-lg shadow-xl w-full max-w-4xl mx-auto">
+      <h2 className="text-2xl font-semibold text-center mb-6 text-coffee">Create Job Listing</h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
         <Input
           name="title"
-          placeholder="İş Başlığı"
+          placeholder="Job Title"
           value={job.title}
           onChange={handleChange}
+          className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
         />
         <Textarea
           name="description"
-          placeholder="Açıklama"
+          placeholder="Description"
           value={job.description}
           onChange={handleChange}
+          className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
         />
         <Input
           name="categories"
-          placeholder="Kategori"
+          placeholder="Categories"
           value={job.categories.join(", ")}
           onChange={(e) =>
             setJob({
@@ -88,82 +89,86 @@ const JobApplicationForm = () => {
               categories: e.target.value.split(",").map((cat) => cat.trim()),
             })
           }
+          className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
         />
-        <div className="flex space-x-2">
+        <div className="flex space-x-4">
           <Input
             name="budget.min"
-            placeholder="Bütçe Min"
+            placeholder="Min Budget"
             type="number"
             value={job.budget.min || ""}
             onChange={handleChange}
             required
+            className="w-1/2 p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
           />
           <Input
             name="budget.max"
-            placeholder="Bütçe Max"
+            placeholder="Max Budget"
             type="number"
             value={job.budget.max || ""}
             onChange={handleChange}
             required
+            className="w-1/2 p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
           />
         </div>
         <Input
           name="deliveryTime"
-          placeholder="Teslim Süresi"
+          placeholder="Delivery Time"
           value={job.deliveryTime}
           onChange={handleChange}
+          className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
         />
         <Input
           name="jobType"
-          placeholder="İş Türü"
+          placeholder="Job Type"
           value={job.jobType}
           onChange={handleChange}
+          className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
         />
         <Input
           name="portfolio"
-          placeholder="Portföy Linki"
+          placeholder="Portfolio Link"
           value={job.portfolio}
           onChange={handleChange}
+          className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
         />
         <Input
           name="evaluation"
-          placeholder="Değerlendirme"
+          placeholder="Evaluation"
           value={job.evaluation}
           onChange={handleChange}
+          className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
         />
-        <div>
+        <div className="space-y-2">
           <Input
             type="text"
-            placeholder="Etiketler (Enter ile ekleyin, max 5)"
+            placeholder="Tags (Press Enter to Add, max 5)"
             value={tagInput}
             onChange={(e) => setTagInput(e.target.value)}
             onKeyDown={handleTagChange}
             disabled={job.tags.length >= 5}
+            className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
           />
-          <div>
-            {job.tags && job.tags.length > 0 ? (
-              job.tags.map((tag, index) => (
-                <span key={index} className="mr-2 mb-2 text-xs bg-gray-200 px-3 py-1 rounded-full">
-                  #{tag}
-                </span>
-              ))
-            ) : (
-              <span></span>
-            )}
+          <div className="flex flex-wrap space-x-2">
+            {job.tags.map((tag, index) => (
+              <span key={index} className="text-xs bg-gray-200 text-gray-800 px-3 py-1 rounded-full">
+                #{tag}
+              </span>
+            ))}
           </div>
-
         </div>
         <Textarea
           name="details"
-          placeholder="İş Detayları (Her satır yeni bir madde)"
+          placeholder="Job Details (Each line is a new item)"
           value={job.details.join("\n")}
           onChange={(e) =>
             setJob({ ...job, details: e.target.value.split("\n") })
           }
           rows={4}
+          className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
         />
-        <Button type="submit" className="w-full bg-blue-500 text-white">
-          İlanı Yayınla
+        <Button type="submit" className="w-full p-4 bg-coffee bg-cardBtnNtr text-white rounded-md hover:bg-cardInfo transition duration-300">
+          Publish Job Listing
         </Button>
       </form>
     </div>

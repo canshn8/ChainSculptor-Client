@@ -11,7 +11,7 @@ const request = async (method, url, data) => {
   if (storedUser) {
     try {
       const user = JSON.parse(storedUser); 
-      console.log(user);  
+      console.log(...user);  
       if (user.data && user.data.token) {
         TOKEN = user.data.token;  
         console.log(TOKEN); 
@@ -22,7 +22,7 @@ const request = async (method, url, data) => {
   }
 
   const headers = TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {};
-
+  
   try {
     const res = await axios({
       method,
