@@ -117,11 +117,11 @@ export const fetchJobs = () => async (dispatch, getState) => {
 export const addJob = (jobData) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
-    const response = await request.request('POST', '/job/addJob', jobData);
-    console.log('Response from server:', response);
+    const response = await request('POST', '/job/addJob', jobData);
+    console.log('Response from server:', response +" "+ 'Job Data From user forms : ' , jobData);
 
-    const { job, success } = response; 
-    if (success && job) {
+    
+    if (response) {
       dispatch(fetchJobs());
     } else {
       console.error('No job data or operation was unsuccessful');

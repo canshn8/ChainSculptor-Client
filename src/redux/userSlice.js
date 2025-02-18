@@ -61,7 +61,7 @@ const userSlice = createSlice({
 export const login = (userData) => async (dispatch) => {
   dispatch(loginStart());
   try {
-    const res = await request.request('POST', '/auth/signin', userData);
+    const res = await request('POST', '/auth/signin', userData);
     console.log(userData);
     
     console.log("Response from API : ",res);
