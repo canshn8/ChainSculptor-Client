@@ -1,1 +1,3 @@
-* linguist-language=React
+*.jsx linguist-detectable
+*.tsx linguist-detectable
+*.js linguist-vendored
