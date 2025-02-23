@@ -15,13 +15,13 @@ const JobList = () => {
     if (allJobs.length === 0) {
       dispatch(fetchJobs());
     }
-  }, [dispatch, allJobs.length]);  
+  }, [dispatch, allJobs.length]);
 
   const loadMoreJobs = () => {
     if (loading) return;
-  
+
     dispatch(setLoading(true));
-  
+
     setTimeout(() => {
       const newJobs = allJobs.slice(page * 6, (page + 1) * 6);  
       if (newJobs.length > 0) {
@@ -44,7 +44,7 @@ const JobList = () => {
 
     if (loader.current) observer.observe(loader.current);
     return () => observer.disconnect();
-  }, [allJobs, jobs, loading, loadMoreJobs]);  
+  }, [allJobs, jobs, loading, loadMoreJobs]);
 
   const handleCardClick = (job) => setSelectedJob(job);
   const handleClose = () => setSelectedJob(null);
@@ -67,14 +67,18 @@ const JobList = () => {
   return (
     <div className="max-w-7xl mx-auto p-4">
       <SearchFilter onSearch={handleSearch} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-20">
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-96">
         {jobs.map((job, index) => (
           <Card key={index} job={job} onCardClick={handleCardClick} />
         ))}
+
         <div ref={loader} className="h-10 bg-transparent"></div>
+
         {loading && jobs.length < allJobs.length && (
           <p className="text-center text-gray-500">Yükleniyor...</p>
         )}
+
         {selectedJob && <CardDetails job={selectedJob} onClose={handleClose} />}
       </div>
     </div>
