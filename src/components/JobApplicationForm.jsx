@@ -11,6 +11,8 @@ const JobApplicationForm = () => {
     title: "",
     description: "",
     categories: [],
+    details: [],
+    tags: [], 
     budget: {
       min: "",
       max: "",
@@ -24,8 +26,6 @@ const JobApplicationForm = () => {
     escrowStatus: "Pending",
     paymentStatus: "Pending",
     freelancerApplications: [],
-    details: [],
-    tags: [], 
   });
 
   const [tagInput, setTagInput] = useState("");

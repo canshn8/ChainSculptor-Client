@@ -11,7 +11,6 @@ const request = async (method, url, data) => {
       const user = JSON.parse(storedUser);
       console.log("Stored User:", user);
 
-      // Doğru formatı kontrol et
       TOKEN = user?.token || user?.data?.token || null;
       console.log("Extracted Token:", TOKEN);
     } catch (err) {

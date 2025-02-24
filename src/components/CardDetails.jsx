@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { FaBookmark } from "react-icons/fa";
 
 const CardDetails = ({ job, onClose }) => {
   const modalRef = useRef(null);
-  const [isBookmarked, setIsBookmarked] = useState(false); 
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        onClose(); 
+        onClose();
       }
     };
 
@@ -19,7 +18,7 @@ const CardDetails = ({ job, onClose }) => {
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
-      onClose(); 
+      onClose();
     }
   };
 
@@ -30,78 +29,87 @@ const CardDetails = ({ job, onClose }) => {
   if (!job) return null;
 
   return (
-    <AnimatePresence>
-      {job && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-blur-md z-50"
-          onClick={handleClickOutside}
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-blur-md z-50"
+      onClick={handleClickOutside}
+    >
+      <div
+        ref={modalRef}
+        className="bg-white rounded-2xl shadow-2xl p-10 w-[80%] max-w-[60vw] h-[85vh] overflow-y-auto relative"
+      >
+        <button
+          className="absolute top-6 right-6 text-gray-800 text-4xl"
+          onClick={onClose}
         >
-          <motion.div
-            ref={modalRef}
-            className="bg-white dark:bg-bej rounded-2xl shadow-2xl p-10 w-[80%] max-w-[60vw] h-[85vh] overflow-y-auto relative"
-            initial={{ opacity: 0, scale: 0.3 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-          >
-            <button
-              className="absolute top-6 right-6 text-gray-800 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white text-4xl"
-              onClick={onClose}
-            >
-              ✕
-            </button>
-      
-            <button
-              onClick={toggleBookmark}
-              className="absolute top-6 right-16 text-4xl text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-            >
-              <FaBookmark color={isBookmarked ? "#ffcc00" : "#ccc"} />
-            </button>
+          ✕
+        </button>
 
-            <h2 className="text-5xl font-bold text-darkBrown text-center mt-10">{"asad "+job.title}</h2>
-            <p className="text-xl text-darkBrown mt-6 text-center">{"asdasdasdasdas"+job.description}</p>
-        
-            <div className="mt-8 grid gap-6">
+        <button
+          onClick={toggleBookmark}
+          className="absolute top-6 right-16 text-4xl text-gray-800"
+        >
+          <FaBookmark color={isBookmarked ? "#ffcc00" : "#ccc"} />
+        </button>
+
+        <div className="flex flex-col md:flex-row">
+          <div className="md:w-1/3 p-4 relative">
+            <img
+              src={
+                job.imageUrl ||
+                "https://www.sgstechnologies.net/sites/default/files/2021-08/future-webdesign.jpg"
+              }
+              alt={job.title}
+              className="w-full h-auto object-cover rounded-lg"
+            />
+          </div>
+
+          <div className="md:w-2/3 p-6 flex flex-col justify-between">
+            <h2 className="text-3xl font-bold text-gray-800 mb-2">
+              {job.title}
+            </h2>
+            <p className="text-sm text-gray-600 mb-4">{job.description}</p>
+
+
+            <ul className="text-sm text-gray-700 mb-6">
+              {job.details.map((detail, index) => (
+                <li key={index} className="flex items-center mb-1">
+                  {detail}
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-3xl font-semibold text-darkBrown">Şirket Bilgileri</h3>
-                <p className="text-xl text-darkBrown mt-2"><strong>Şirket:</strong> {job.employer.email}</p>
-                <p className="text-xl text-darkBrown"><strong>İletişim:</strong> {job.employer.email}</p>
-              </div>
-      
-              <div>
-                <h3 className="text-3xl font-semibold text-darkBrown">İş Bilgileri</h3>
-                <p className="text-xl text-darkBrown mt-2"><strong>Bütçe:</strong> ${job.budget.min} - ${job.budget.max}</p>
-                <p className="text-xl text-darkBrown"><strong>Teslim Süresi:</strong> {job.deliveryTime}</p>
-                <p className="text-xl text-darkBrown"><strong>İş Tipi:</strong> {job.jobType}</p>
-                <p className="text-xl text-darkBrown"><strong>Durum:</strong> {job.status}</p>
               </div>
             </div>
-      
-            <div className="mt-8">
-              <h3 className="text-3xl font-semibold text-darkBrown">Kategoriler</h3>
-              <ul className="list-disc ml-8 mt-4 text-darkBrown">
-                {job.categories?.length > 0 ? (
-                  job.categories.map((category, index) => (
-                    <li key={index}>{category}</li>
-                  ))
-                ) : (
-                  <li>Henüz kategori eklenmemiş.</li>
-                )}
-              </ul>
-            </div>
-      
-            <div className="mt-8 text-center">
+
+            <div className="flex justify-center mt-6">
               <button
-                onClick={() => window.location.href = `mailto:${job.employer.email}?subject=Başvuru: ${job.title}`}
+                onClick={() =>
+                  (window.location.href = `mailto:${job.employer.email}?subject=Application: ${job.title}`)
+                }
                 className="bg-dark-brown text-cardTxt px-6 py-3 rounded-lg text-xl transition-all duration-300 transform hover:text-cardBtnHvr hover:bg-[#4b3f35] hover:scale-105 hover:shadow-lg"
               >
-                Başvur
+                Apply
               </button>
             </div>
-          </motion.div>
+          </div>
         </div>
-      )}
-    </AnimatePresence>
+
+        <div className="mt-8">
+          <h3 className="text-3xl font-semibold text-darkBrown">Categories</h3>
+          <ul className="list-disc ml-8 mt-4 text-darkBrown">
+            {job.categories?.length > 0 ? (
+              job.categories.map((category, index) => (
+                <li key={index}>{category}</li>
+              ))
+            ) : (
+              <li>No categories added yet.</li>
+            )}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 };
 
