@@ -31,7 +31,11 @@
     "react-router-dom": "^7.1.4",
     "react-transition-group": "^4.4.5",
     "redux": "^5.0.1",
-    "redux-thunk": "^3.1.0"
+    "redux-thunk": "^3.1.0",
+    "slate": "^0.112.0",
+    "slate-history": "^0.110.3",
+    "slate-hyperscript": "^0.100.0",
+    "slate-react": "^0.112.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

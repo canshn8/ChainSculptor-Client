@@ -1,24 +1,35 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { addJob } from "../redux/jobSlice";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { addJob } from '../redux/jobSlice';
+
+
+
+
+
+
+//RICH TEXT EKLE!!!!!!!!!!!
+
+
+
+
 
 const JobApplicationForm = () => {
   const dispatch = useDispatch();
   const [job, setJob] = useState({
     title: "",
-    description: "",
+    description: [], 
     categories: [],
-    details: [],
-    tags: [], 
+    details: [], 
+    tags: [],
     budget: {
       min: "",
       max: "",
     },
     deliveryTime: "",
-    employer: "", 
+    employer: "",
     jobType: "",
     status: "Open",
     portfolio: "",
@@ -37,7 +48,7 @@ const JobApplicationForm = () => {
         ...job,
         budget: {
           ...job.budget,
-          [name.split(".")[1]]: value ? parseFloat(value) : "", 
+          [name.split(".")[1]]: value ? parseFloat(value) : "",
         },
       });
     } else {
@@ -72,13 +83,15 @@ const JobApplicationForm = () => {
           onChange={handleChange}
           className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
         />
-        <Textarea
-          name="description"
-          placeholder="Description"
-          value={job.description}
-          onChange={handleChange}
-          className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
-        />
+        
+        <div className="space-y-4">
+          <label className="text-lg font-semibold text-coffee">Description</label>
+          <RichTextEditor
+  value={job.description || ""}
+  onChange={(value) => setJob((prevState) => ({ ...prevState, description: value }))}
+/>
+        </div>
+        
         <Input
           name="categories"
           placeholder="Categories"
@@ -111,6 +124,15 @@ const JobApplicationForm = () => {
             className="w-1/2 p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
           />
         </div>
+        
+        <div className="space-y-4">
+          <label className="text-lg font-semibold text-coffee">Job Details</label>
+          <RichTextEditor
+  value={job.details || ""}
+  onChange={(value) => setJob((prevState) => ({ ...prevState, details: value }))}
+/>
+        </div>
+        
         <Input
           name="deliveryTime"
           placeholder="Delivery Time"
@@ -139,6 +161,7 @@ const JobApplicationForm = () => {
           onChange={handleChange}
           className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
         />
+        
         <div className="space-y-2">
           <Input
             type="text"
@@ -157,16 +180,7 @@ const JobApplicationForm = () => {
             ))}
           </div>
         </div>
-        <Textarea
-          name="details"
-          placeholder="Job Details (Each line is a new item)"
-          value={job.details.join("\n")}
-          onChange={(e) =>
-            setJob({ ...job, details: e.target.value.split("\n") })
-          }
-          rows={4}
-          className="w-full p-4 rounded-md border-2 border-coffee focus:outline-none focus:ring-2 focus:ring-coffee"
-        />
+        
         <Button type="submit" className="w-full p-4 bg-coffee bg-cardBtnNtr text-white rounded-md hover:bg-cardInfo transition duration-300">
           Publish Job Listing
         </Button>
